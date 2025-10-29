@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Spending at LSE - SPP Students</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5em;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nudge-section {
+            margin: 40px 0;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .nudge-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .nudge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .nudge-card h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .stat-highlight {
+            font-size: 3em;
+            color: #667eea;
+            font-weight: bold;
+            display: block;
+            margin: 20px 0;
+        }
+        
+        .comparison {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .comparison-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .comparison-box.bad {
+            border: 3px solid #e74c3c;
+        }
+        
+        .comparison-box.good {
+            border: 3px solid #27ae60;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: white;
+            color: #11998e;
+            padding: 20px 40px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .counter {
+            margin-top: 20px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            border-radius: 5px;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>🍺 Think Before You Drink</h1>
+            <p>Smart Spending for SPP Students at LSE</p>
+        </div>
+    </div>
+
+    <!-- Nudge Section 1: Social Norms -->
+    <div class="container">
+        <div class="nudge-section">
+            <div class="nudge-card">
+                <h2>📊 What Your Peers Actually Spend</h2>
+                <span class="stat-highlight">73%</span>
+                <p style="font-size: 1.3em;">of SPP students spend <strong>less than £20</strong> per night out</p>
+                <br>
+                <p style="font-size: 1.2em; color: #666;">You're not missing out by spending less - you're joining the smart majority!</p>
+            </div>
+        </div>
+
+        <!-- Nudge Section 2: Opportunity Cost -->
+        <div class="nudge-section">
+            <div class="nudge-card">
+                <h2>💰 Your Night Out = Your Week</h2>
+                <div class="comparison">
+                    <div class="comparison-box bad">
+                        <h3>One Friday Night</h3>
+                        <p style="font-size: 2em;">£40</p>
+                        <p>4 pints at The George</p>
+                        <p>+ shots with friends</p>
+                    </div>
+                    <div class="comparison-box good">
+                        <h3>Same £40 Could Be</h3>
+                        <p style="font-size: 1.3em;">📚 2 textbooks</p>
+                        <p style="font-size: 1.3em;">☕ 10 coffees at LSE</p>
+                        <p style="font-size: 1.3em;">🍔 4 lunches at Wright's Bar</p>
+                        <p style="font-size: 1.3em;">🚇 Weekly transport</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nudge Section 3: Future Self -->
+        <div class="nudge-section">
+            <div class="nudge-card">
+                <h2>😰 Tomorrow You Will Feel...</h2>
+                <span class="stat-highlight">87%</span>
+                <p style="font-size: 1.3em;">of students report <strong>regret</strong> after overspending on alcohol</p>
+                <br>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <p style="font-size: 1.2em; font-style: italic;">"Oh fuck" - The most common morning-after reaction</p>
+                    <small>- Your fellow SPP students, every Saturday morning</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nudge Section 4: Commitment Device -->
+        <div class="nudge-section">
+            <div class="nudge-card">
+                <h2>🎯 Set Your Limit NOW (While Sober)</h2>
+                <p style="font-size: 1.3em; margin: 20px 0;">Students who set a budget before going out spend <strong>35% less</strong></p>
+                
+                <div class="tips-grid">
+                    <div class="tip">
+                        <strong>Tip 1:</strong> Decide your limit at 5pm, not 9pm
+                    </div>
+                    <div class="tip">
+                        <strong>Tip 2:</strong> Tell a friend your budget
+                    </div>
+                    <div class="tip">
+                        <strong>Tip 3:</strong> Leave cards at home, bring cash only
+                    </div>
+                    <div class="tip">
+                        <strong>Tip 4:</strong> Set a phone reminder for 10pm
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nudge Section 5: The George Effect -->
+        <div class="nudge-section">
+            <div class="nudge-card" style="border: 3px solid #e74c3c;">
+                <h2>⚠️ The Hidden George Trap</h2>
+                <p style="font-size: 1.3em; color: #e74c3c; margin: 20px 0;">
+                    <strong>WARNING:</strong> George purchases show as "LSE Catering" in your bank
+                </p>
+                <p style="font-size: 1.2em;">This makes you forget how much you're really spending on drinks!</p>
+                <br>
+                <p style="font-size: 1.1em;">✅ <strong>Solution:</strong> Check your "LSE Catering" charges every Saturday morning</p>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px;">🎯 Take Control of Your Spending</h2>
+            <p style="font-size: 1.3em;">Download our FREE Budget Tracker designed specifically for SPP students</p>
+            <p style="font-size: 1.1em; margin-top: 15px;">✓ Track drinks separately from food<br>
+            ✓ See weekly spending patterns<br>
+            ✓ Set and monitor your limits<br>
+            ✓ Compare weekday vs weekend spending</p>
+            
+            <a href="#" class="download-btn pulse" onclick="downloadTracker()">
+                📊 Download Budget Tracker (Excel)
+            </a>
+            
+            <div class="counter">
+                <span id="downloadCount">0</span> smart students have already downloaded this tool
+            </div>
+        </div>
+
+        <!-- Final Reminder -->
+        <div class="nudge-section">
+            <div class="nudge-card" style="background: #d4edda; text-align: center;">
+                <h2 style="color: #155724;">Remember: Good Times ≠ Big Spending</h2>
+                <p style="font-size: 1.3em; margin-top: 20px;">Your friends value your presence, not your rounds</p>
+                <p style="font-size: 1.2em; margin-top: 15px; font-weight: bold;">Smart socializing is the new normal at LSE</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize download counter from localStorage
+        let downloads = localStorage.getItem('downloadCount') || 0;
+        document.getElementById('downloadCount').textContent = downloads;
+        
+        function downloadTracker() {
+            // Increment counter
+            downloads++;
+            localStorage.setItem('downloadCount', downloads);
+            document.getElementById('downloadCount').textContent = downloads;
+            
+            // Track the download (you can replace this with actual Google Analytics or similar)
+            console.log('Download tracked: ' + downloads);
+            
+            // Create the Excel file URL (you'll need to host this file)
+            // For now, this creates a sample CSV that can open in Excel
+            const csvContent = `Date,Venue,Planned Budget (£),Actual Spent (£),Drinks Count,Notes
+${new Date().toLocaleDateString()},The George,15,,,Set your limit before going out!
+${new Date().toLocaleDateString()},Three Tuns,10,,,Cheaper alternative
+${new Date().toLocaleDateString()},Other,20,,,Track every night out
+
+Weekly Summary
+Total Planned:,45
+Total Actual:,
+Saved/Overspent:,
+
+Tips:
+1. Fill this BEFORE going out
+2. Check the next morning
+3. Notice patterns
+4. Celebrate when you stay under budget!`;
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'SPP_Alcohol_Budget_Tracker.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            alert('Download started! Open this file in Excel to start tracking your smart spending.');
+        }
+        
+        // Add some dynamic elements
+        window.addEventListener('load', function() {
+            // Animate numbers
+            const stats = document.querySelectorAll('.stat-highlight');
+            stats.forEach(stat => {
+                const finalValue = stat.textContent;
+                let currentValue = 0;
+                const increment = parseInt(finalValue) / 20;
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= parseInt(finalValue)) {
+                        clearInterval(timer);
+                        stat.textContent = finalValue;
+                    } else {
+                        stat.textContent = Math.floor(currentValue) + '%';
+                    }
+                }, 50);
+            });
+        });
+    </script>
+</body>
+</html>
