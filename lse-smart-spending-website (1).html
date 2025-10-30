@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Spending Hub - Evidence-based tools to help LSE students manage alcohol spending">
+    <meta name="keywords" content="LSE, student budget, alcohol spending, behavioral economics, smart spending">
+    <meta name="author" content="LSE PP452 Research Team">
+    <title>Smart Spending Hub - Think Before You Drink | LSE Students</title>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-purple: #764ba2;
+            --primary-blue: #667eea;
+            --success-green: #38ef7d;
+            --danger-red: #e74c3c;
+            --warning-yellow: #f39c12;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 2rem; }
+        h4 { font-size: 1.5rem; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.5rem; }
+            h4 { font-size: 1.25rem; }
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            animation: slideInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .savings-counter {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            animation: pulse 2s infinite;
+        }
+        
+        .savings-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--success-green);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary-purple);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Particles Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        /* Nudges Section */
+        .nudges-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .nudges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .nudge-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+        
+        .nudge-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .nudge-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            margin: 20px 0;
+            height: 200px;
+            position: relative;
+        }
+        
+        .donut-chart {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        
+        /* Calculator Section */
+        .calculator-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .calculator-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .result-box.show {
+            display: block;
+            animation: slideInUp 0.5s;
+        }
+        
+        /* Tracker Section */
+        .tracker-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 5px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: var(--gradient);
+            color: var(--white);
+        }
+        
+        .tab-content {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        /* Tracker Table */
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .tracker-table th {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .tracker-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        /* Success Animation */
+        .success-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            font-size: 100px;
+            animation: celebrate 1s ease;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0); }
+            50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+            100% { transform: translate(-50%, -50%) scale(0) rotate(360deg); }
+        }
+        
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #1a1a1a;
+            color: var(--light);
+        }
+        
+        body.dark-mode .nudge-card,
+        body.dark-mode .calculator-card,
+        body.dark-mode .tab-content {
+            background: #2a2a2a;
+            color: var(--light);
+        }
+        
+        /* Toggle Switch */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--white);
+            border-radius: 30px;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nudges-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tracker-table {
+                font-size: 14px;
+            }
+            
+            .tracker-table th,
+            .tracker-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleDarkMode()">
+        <span id="themeIcon">🌙</span>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Think Before You Drink</h1>
+                <p>Smart Spending for LSE Students</p>
+                <div class="savings-counter">
+                    <p>Students have saved</p>
+                    <div class="savings-amount">£<span id="savingsCounter">0</span></div>
+                    <p>this term</p>
+                </div>
+                <a href="#calculator" class="cta-button">Start Your Smart Spending Journey</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Behavioral Nudges Section -->
+    <section class="nudges-section">
+        <div class="container">
+            <h2 class="section-title">What You Need to Know</h2>
+            
+            <div class="nudges-grid">
+                <!-- Social Norms Card -->
+                <div class="nudge-card" style="animation-delay: 0.1s">
+                    <div class="nudge-icon">👥</div>
+                    <h3>Social Norms</h3>
+                    <div class="stat-number" id="socialNormStat">73%</div>
+                    <p>of SPP students spend less than £20 per night</p>
+                    <div class="chart-container">
+                        <canvas id="donutChart" class="donut-chart"></canvas>
+                    </div>
+                    <p><strong>You're not missing out by spending less - you're joining the smart majority!</strong></p>
+                </div>
+                
+                <!-- Opportunity Cost Card -->
+                <div class="nudge-card" style="animation-delay: 0.2s">
+                    <div class="nudge-icon">💰</div>
+                    <h3>Opportunity Cost</h3>
+                    <p>One night out (£40) equals:</p>
+                    <ul style="list-style: none; padding: 20px 0;">
+                        <li>☕ 10 coffees at LSE</li>
+                        <li>🍔 4 lunches at Wright's Bar</li>
+                        <li>📚 2 textbooks</li>
+                        <li>🚇 Weekly transport</li>
+                    </ul>
+                    <input type="range" id="spendingSlider" min="10" max="60" value="40" style="width: 100%;">
+                    <p>£<span id="sliderValue">40</span> = <span id="equivalents">4 lunches</span></p>
+                </div>
+                
+                <!-- Regret Predictor Card -->
+                <div class="nudge-card" style="animation-delay: 0.3s">
+                    <div class="nudge-icon">😰</div>
+                    <h3>Tomorrow's Regret</h3>
+                    <div class="stat-number" id="regretStat">0%</div>
+                    <p>of students experience next-day spending regret</p>
+                    <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 10px; margin-top: 20px;">
+                        <p style="font-style: italic;">"Oh f*ck" - The most common morning-after reaction</p>
+                    </div>
+                </div>
+                
+                <!-- George Trap Warning Card -->
+                <div class="nudge-card" style="animation-delay: 0.4s; border: 3px solid var(--danger-red);">
+                    <div class="nudge-icon" style="background: var(--danger-red);">⚠️</div>
+                    <h3>The George Trap</h3>
+                    <p><strong>WARNING:</strong> George purchases show as "LSE Catering" in your bank</p>
+                    <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-family: monospace;">23 Oct - LSE Catering - £32.50</p>
+                        <p style="font-family: monospace;">24 Oct - LSE Catering - £28.00</p>
+                        <p style="font-family: monospace;">25 Oct - LSE Catering - £45.00</p>
+                    </div>
+                    <p>This makes you forget how much you're really spending on drinks!</p>
+                </div>
+                
+                <!-- Commitment Device Card -->
+                <div class="nudge-card" style="animation-delay: 0.5s">
+                    <div class="nudge-icon">🎯</div>
+                    <h3>Set Your Limit NOW</h3>
+                    <p>Students who set budgets at 5pm (while sober) spend:</p>
+                    <div class="stat-number">35% less</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="commitmentProgress" style="width: 35%;">35% Success Rate</div>
+                    </div>
+                    <p>vs. those who decide at 10pm (after drinks)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Calculator Section -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <h2 class="section-title">Budget Calculator</h2>
+            
+            <div class="calculator-card">
+                <div class="form-group">
+                    <label for="budget">💰 Tonight's Budget (£)</label>
+                    <input type="number" id="budget" value="20" min="0" max="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="venue">📍 Where are you going?</label>
+                    <select id="venue">
+                        <option value="8">The George (£8/pint)</option>
+                        <option value="6">Three Tuns (£6/pint)</option>
+                        <option value="5">Spoons (£5/pint)</option>
+                        <option value="7">Average Pub (£7/pint)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rounds">👥 Buying rounds?</label>
+                    <select id="rounds">
+                        <option value="1">No, just for me</option>
+                        <option value="2">One round for 2</option>
+                        <option value="3">One round for 3</option>
+                        <option value="4">One round for 4+</option>
+                    </select>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateBudget()">Calculate My Limit</button>
+                
+                <div class="result-box" id="resultBox">
+                    <h3>Your Smart Spending Plan</h3>
+                    <p id="drinkLimit"></p>
+                    <p id="budgetTip"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tracker Section -->
+    <section class="tracker-section">
+        <div class="container">
+            <h2 class="section-title">Track Your Progress</h2>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('quick')">Quick Calculator</button>
+                <button class="tab" onclick="switchTab('log')">Spending Log</button>
+                <button class="tab" onclick="switchTab('insights')">Insights</button>
+            </div>
+            
+            <!-- Quick Calculator Tab -->
+            <div class="tab-content active" id="quickTab">
+                <h3>Quick Night Out Calculator</h3>
+                <div class="form-group">
+                    <label>How much did you plan to spend?</label>
+                    <input type="number" id="plannedSpend" placeholder="£20">
+                </div>
+                <div class="form-group">
+                    <label>How much did you actually spend?</label>
+                    <input type="number" id="actualSpend" placeholder="£35">
+                </div>
+                <button class="calculate-btn" onclick="quickCompare()">Compare</button>
+                <div id="quickResult"></div>
+            </div>
+            
+            <!-- Spending Log Tab -->
+            <div class="tab-content" id="logTab">
+                <h3>Your Spending History</h3>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="logDate">
+                </div>
+                <div class="form-group">
+                    <label>Venue</label>
+                    <input type="text" id="logVenue" placeholder="The George">
+                </div>
+                <div class="form-group">
+                    <label>Amount Spent (£)</label>
+                    <input type="number" id="logAmount" placeholder="25">
+                </div>
+                <button class="calculate-btn" onclick="addLog()">Add Entry</button>
+                
+                <table class="tracker-table" id="spendingTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Venue</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logTableBody">
+                        <!-- Entries will be added here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Insights Tab -->
+            <div class="tab-content" id="insightsTab">
+                <h3>Your Spending Insights</h3>
+                <div id="insightsContent">
+                    <p>Add some entries to see your spending patterns!</p>
+                </div>
+                <button class="calculate-btn" onclick="exportData()">Export to CSV</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>LSE PP452 Course Project</strong></p>
+            <p>Research Ethics Approved | Data Privacy Compliant</p>
+            <p>© 2024 Smart Spending Hub - For Academic Research Purposes</p>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
+                This website is part of a behavioral economics research project. 
+                All data is stored locally on your device and is not transmitted to any server.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Success Animation -->
+    <div class="success-animation" id="successAnimation">🎉</div>
+    
+    <script>
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Animated counter
+        function animateCounter(id, target, duration = 2000) {
+            const element = document.getElementById(id);
+            const start = 0;
+            const increment = target / (duration / 50);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 50);
+        }
+        
+        // Initialize savings counter
+        function initSavingsCounter() {
+            const savedAmount = localStorage.getItem('totalSaved') || 4750;
+            animateCounter('savingsCounter', savedAmount);
+        }
+        
+        // Draw donut chart
+        function drawDonutChart() {
+            const canvas = document.getElementById('donutChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 80;
+            
+            // Draw 73% segment
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2 * 0.73);
+            ctx.lineTo(centerX, centerY);
+            ctx.fillStyle = '#667eea';
+            ctx.fill();
+            
+            // Draw 27% segment
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, Math.PI * 2 * 0.73, Math.PI * 2);
+            ctx.lineTo(centerX, centerY);
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fill();
+            
+            // Draw center circle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.6, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            
+            // Add text
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 24px Inter';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('73%', centerX, centerY);
+        }
+        
+        // Spending slider
+        document.getElementById('spendingSlider')?.addEventListener('input', function(e) {
+            const value = e.target.value;
+            document.getElementById('sliderValue').textContent = value;
+            
+            const coffees = Math.floor(value / 4);
+            const lunches = Math.floor(value / 10);
+            const transport = Math.floor(value / 30);
+            
+            let equivalent = '';
+            if (coffees > 0) equivalent = `${coffees} coffees`;
+            if (lunches > 0) equivalent += ` or ${lunches} lunches`;
+            if (transport > 0) equivalent += ` or ${transport} weeks of transport`;
+            
+            document.getElementById('equivalents').textContent = equivalent;
+        });
+        
+        // Calculate budget
+        function calculateBudget() {
+            const budget = parseFloat(document.getElementById('budget').value);
+            const drinkPrice = parseFloat(document.getElementById('venue').value);
+            const rounds = parseFloat(document.getElementById('rounds').value);
+            
+            const effectivePrice = drinkPrice * rounds;
+            const maxDrinks = Math.floor(budget / effectivePrice);
+            
+            const resultBox = document.getElementById('resultBox');
+            const drinkLimit = document.getElementById('drinkLimit');
+            const budgetTip = document.getElementById('budgetTip');
+            
+            drinkLimit.innerHTML = `<strong>You can have: ${maxDrinks} drinks</strong>`;
+            
+            let tip = '';
+            if (rounds > 1) {
+                tip = `⚠️ Buying rounds costs you £${effectivePrice} per drink! Consider alternating rounds or buying your own.`;
+            } else if (maxDrinks <= 2) {
+                tip = '💡 Tight budget? Pre-drink at home or choose a cheaper venue!';
+            } else {
+                tip = '✅ Great! You have a reasonable limit. Stick to it!';
+            }
+            
+            budgetTip.textContent = tip;
+            resultBox.classList.add('show');
+            
+            // Track usage
+            trackUsage('calculator_used');
+        }
+        
+        // Tab switching
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            if (tabName === 'insights') {
+                generateInsights();
+            }
+        }
+        
+        // Quick comparison
+        function quickCompare() {
+            const planned = parseFloat(document.getElementById('plannedSpend').value);
+            const actual = parseFloat(document.getElementById('actualSpend').value);
+            const difference = actual - planned;
+            
+            const resultDiv = document.getElementById('quickResult');
+            
+            if (difference <= 0) {
+                resultDiv.innerHTML = `
+                    <div style="background: #38ef7d; color: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <h3>🎉 Congratulations!</h3>
+                        <p>You stayed within budget! You saved £${Math.abs(difference).toFixed(2)}</p>
+                    </div>
+                `;
+                showSuccessAnimation();
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <h3>😔 You overspent</h3>
+                        <p>You went £${difference.toFixed(2)} over budget</p>
+                        <p style="margin-top: 10px;">💡 Next time, try leaving your card at home and bringing cash only!</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Add spending log
+        function addLog() {
+            const date = document.getElementById('logDate').value;
+            const venue = document.getElementById('logVenue').value;
+            const amount = document.getElementById('logAmount').value;
+            
+            if (!date || !venue || !amount) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            logs.push({ date, venue, amount: parseFloat(amount), id: Date.now() });
+            localStorage.setItem('spendingLogs', JSON.stringify(logs));
+            
+            displayLogs();
+            trackUsage('log_added');
+        }
+        
+        // Display logs
+        function displayLogs() {
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            const tbody = document.getElementById('logTableBody');
+            
+            tbody.innerHTML = '';
+            logs.forEach(log => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${log.date}</td>
+                    <td>${log.venue}</td>
+                    <td>£${log.amount.toFixed(2)}</td>
+                    <td><button onclick="deleteLog(${log.id})" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Delete</button></td>
+                `;
+            });
+        }
+        
+        // Delete log
+        function deleteLog(id) {
+            let logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            logs = logs.filter(log => log.id !== id);
+            localStorage.setItem('spendingLogs', JSON.stringify(logs));
+            displayLogs();
+        }
+        
+        // Generate insights
+        function generateInsights() {
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            const insightsDiv = document.getElementById('insightsContent');
+            
+            if (logs.length === 0) {
+                insightsDiv.innerHTML = '<p>Add some entries to see your spending patterns!</p>';
+                return;
+            }
+            
+            const total = logs.reduce((sum, log) => sum + log.amount, 0);
+            const average = total / logs.length;
+            
+            const venueSpending = {};
+            logs.forEach(log => {
+                venueSpending[log.venue] = (venueSpending[log.venue] || 0) + log.amount;
+            });
+            
+            const mostExpensiveVenue = Object.entries(venueSpending)
+                .sort(([,a], [,b]) => b - a)[0];
+            
+            insightsDiv.innerHTML = `
+                <div style="display: grid; gap: 20px;">
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <h4>Total Spent</h4>
+                        <p style="font-size: 2rem; color: #667eea;">£${total.toFixed(2)}</p>
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <h4>Average Per Night</h4>
+                        <p style="font-size: 2rem; color: #667eea;">£${average.toFixed(2)}</p>
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <h4>Most Expensive Venue</h4>
+                        <p style="font-size: 1.5rem; color: #e74c3c;">${mostExpensiveVenue ? `${mostExpensiveVenue[0]} (£${mostExpensiveVenue[1].toFixed(2)})` : 'N/A'}</p>
+                    </div>
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #f39c12;">
+                        <h4>💡 Tip</h4>
+                        <p>${average > 25 ? 'You\'re spending above the SPP average. Try setting a lower limit!' : 'Great job keeping spending reasonable!'}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Export data
+        function exportData() {
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            
+            let csv = 'Date,Venue,Amount\n';
+            logs.forEach(log => {
+                csv += `${log.date},${log.venue},${log.amount}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'spending_log.csv';
+            a.click();
+            
+            trackUsage('data_exported');
+        }
+        
+        // Success animation
+        function showSuccessAnimation() {
+            const animation = document.getElementById('successAnimation');
+            animation.style.display = 'block';
+            setTimeout(() => {
+                animation.style.display = 'none';
+            }, 1000);
+        }
+        
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        
+        // Track usage
+        function trackUsage(action) {
+            const usage = JSON.parse(localStorage.getItem('usageTracking') || '{}');
+            usage[action] = (usage[action] || 0) + 1;
+            usage.lastUsed = new Date().toISOString();
+            localStorage.setItem('usageTracking', JSON.stringify(usage));
+            
+            // Log for analytics (replace with actual Google Analytics)
+            console.log('Usage tracked:', action, usage);
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initSavingsCounter();
+            drawDonutChart();
+            displayLogs();
+            
+            // Animate stats
+            animateCounter('socialNormStat', 73, 1500);
+            animateCounter('regretStat', 87, 2000);
+            
+            // Load dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').textContent = '☀️';
+            }
+            
+            // Track page view
+            trackUsage('page_view');
+            
+            // Set up intersection observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.nudge-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
