@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Spending Hub - Evidence-based tools to help LSE students manage alcohol spending">
+    <meta name="keywords" content="LSE, student budget, alcohol spending, behavioral economics, smart spending">
+    <meta name="author" content="LSE PP452 Research Team">
+    <title>Smart Spending Hub - Don't Let Your Wallet Get Wasted | LSE Students</title>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-purple: #764ba2;
+            --primary-blue: #667eea;
+            --success-green: #38ef7d;
+            --danger-red: #e74c3c;
+            --warning-yellow: #f39c12;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 2rem; }
+        h4 { font-size: 1.5rem; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.5rem; }
+            h4 { font-size: 1.25rem; }
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Download Section MOVED TO TOP */
+        .download-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-section::before {
+            content: '🍺';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+            transform: rotate(-15deg);
+        }
+        
+        .download-section::after {
+            content: '💸';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            bottom: -30px;
+            left: -30px;
+            transform: rotate(15deg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            animation: slideInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .savings-counter {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            animation: pulse 2s infinite;
+        }
+        
+        .savings-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--success-green);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary-purple);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Particles Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        /* Nudges Section */
+        .nudges-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .nudges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .nudge-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+        
+        .nudge-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .nudge-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            margin: 20px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .donut-chart {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        
+        /* Calculator Section */
+        .calculator-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .calculator-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .result-box.show {
+            display: block;
+            animation: slideInUp 0.5s;
+        }
+        
+        /* Tracker Section */
+        .tracker-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 5px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: var(--gradient);
+            color: var(--white);
+        }
+        
+        .tab-content {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        /* Tracker Table */
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .tracker-table th {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .tracker-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Meme Gallery */
+        .meme-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .meme-card {
+            min-width: 250px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            scroll-snap-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .meme-card .emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        /* Success Animation */
+        .success-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            font-size: 100px;
+            animation: celebrate 1s ease;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0); }
+            50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+            100% { transform: translate(-50%, -50%) scale(0) rotate(360deg); }
+        }
+        
+        /* Fun bounce animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #1a1a1a;
+            color: var(--light);
+        }
+        
+        body.dark-mode .nudge-card,
+        body.dark-mode .calculator-card,
+        body.dark-mode .tab-content {
+            background: #2a2a2a;
+            color: var(--light);
+        }
+        
+        /* Toggle Switch */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--white);
+            border-radius: 30px;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nudges-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tracker-table {
+                font-size: 14px;
+            }
+            
+            .tracker-table th,
+            .tracker-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleDarkMode()">
+        <span id="themeIcon">🌙</span>
+    </div>
+    
+    <!-- Download Section (MOVED TO TOP) -->
+    <section class="download-section">
+        <div class="container">
+            <div style="text-align: center; color: white;">
+                <h1 style="color: white; margin-bottom: 20px; font-size: 3rem;" class="bounce">
+                    🎯 Stop Your Wallet from Getting Wasted!
+                </h1>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">
+                    <strong>FREE Budget Tracker</strong> - Because your bank account shouldn't have a hangover too! 🤕💸
+                </p>
+                <button onclick="downloadExcelTracker()" style="background: white; color: #11998e; padding: 20px 50px; border: none; border-radius: 50px; font-size: 1.4rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: pulse 2s infinite;" onmouseover="this.style.transform='translateY(-3px) scale(1.1)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+                    📥 Get Your Budget Buddy Now!
+                </button>
+                <p style="margin-top: 25px; font-size: 1.3rem;">
+                    <strong>10</strong> smart legends have already saved their wallets 🦸‍♂️
+                </p>
+                <div style="margin-top: 30px; padding: 25px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <p style="font-size: 1.1rem; margin: 0;">
+                        ✅ Track your drunk spending vs sober planning<br>
+                        ✅ See exactly how George IV bamboozles you<br>
+                        ✅ Calculate how many textbooks you drank<br>
+                        ✅ Works with Excel & Google Sheets<br>
+                        ✅ Impress your future self (they'll thank you!)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>The Morning After Calculator™</h1>
+                <p>Because "I only had a few" hits different at £60 🤯</p>
+                <div class="savings-counter">
+                    <p>LSE students have saved</p>
+                    <div class="savings-amount">£<span id="savingsCounter">0</span></div>
+                    <p>from NOT buying that 5th round</p>
+                </div>
+                <a href="#calculator" class="cta-button">Calculate Your Damage Potential 💀</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fun Reality Checks Section -->
+    <section class="nudges-section">
+        <div class="container">
+            <h2 class="section-title">🎭 The Drunk Economics You Need to Know</h2>
+            
+            <div class="nudges-grid">
+                <!-- Social Proof Card -->
+                <div class="nudge-card" style="animation-delay: 0.1s">
+                    <div class="nudge-icon">🕺</div>
+                    <h3>Plot Twist: You're Not Missing Out!</h3>
+                    <div class="stat-number" id="socialNormStat">73%</div>
+                    <p>of your mates spend LESS than £20/night</p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="donutChart" width="300" height="200" style="max-width: 100%;"></canvas>
+                    </div>
+                    <p style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                        <strong>The ones "buying rounds for everyone" are actually sharing one pitcher. Be like them. Be smart. 🧠</strong>
+                    </p>
+                </div>
+                
+                <!-- The Real Cost Card -->
+                <div class="nudge-card" style="animation-delay: 0.2s">
+                    <div class="nudge-icon">🍕</div>
+                    <h3>Drunk You vs Sober You</h3>
+                    <p style="font-size: 1.2rem; font-weight: bold;">One night at George (£40) =</p>
+                    <ul style="list-style: none; padding: 20px 0; font-size: 1.1rem;">
+                        <li>🍕 8 Domino's pizzas</li>
+                        <li>☕ 2 weeks of coffee</li>
+                        <li>📚 That textbook you "can't afford"</li>
+                        <li>🚇 A month of bus rides</li>
+                        <li>🎮 Half a video game</li>
+                    </ul>
+                    <input type="range" id="spendingSlider" min="10" max="60" value="40" style="width: 100%;">
+                    <p style="font-size: 1.2rem; text-align: center; margin-top: 15px;">
+                        £<span id="sliderValue">40</span> = <span id="equivalents">Your gaming budget</span> 😭
+                    </p>
+                </div>
+                
+                <!-- Morning Regret Meter -->
+                <div class="nudge-card" style="animation-delay: 0.3s">
+                    <div class="nudge-icon">😱</div>
+                    <h3>The "Oh Sh*t" Morning Stats</h3>
+                    <div class="stat-number" id="regretStat">0%</div>
+                    <p>check their bank and immediately die inside</p>
+                    <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <p style="font-size: 1.2rem;">Top morning-after texts:</p>
+                        <p>1. "How much did I spend???" 😭</p>
+                        <p>2. "Never drinking again" 🤥</p>
+                        <p>3. "Can someone Revolut me £5?" 📲</p>
+                    </div>
+                </div>
+                
+                <!-- The George Warning -->
+                <div class="nudge-card" style="animation-delay: 0.4s; border: 3px dashed var(--danger-red); background: #fff5f5;">
+                    <div class="nudge-icon" style="background: var(--danger-red);">🚨</div>
+                    <h3>GEORGE IV CONSPIRACY ALERT!</h3>
+                    <p style="font-size: 1.2rem; color: var(--danger-red); font-weight: bold;">
+                        THE ULTIMATE BAMBOOZLE: 
+                    </p>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0; border: 2px solid #333;">
+                        <p style="font-family: 'Courier New', monospace; font-size: 1.1rem;">
+                            Bank Statement:<br>
+                            Oct 23 - LSE CATERING - £32.50<br>
+                            Oct 24 - LSE CATERING - £28.00<br>
+                            Oct 25 - LSE CATERING - £45.00
+                        </p>
+                    </div>
+                    <p style="font-size: 1.1rem;">
+                        Your parents: "Wow, you're eating so healthy at uni!" 🥗<br>
+                        Reality: You just bought 3 rounds of tequila shots 🥃
+                    </p>
+                </div>
+                
+                <!-- Drunk Promise Tracker -->
+                <div class="nudge-card" style="animation-delay: 0.5s">
+                    <div class="nudge-icon">🤝</div>
+                    <h3>Sober You vs Drunk You Battle</h3>
+                    <p style="font-size: 1.2rem;">Students who set limits at <strong>5pm (sober)</strong>:</p>
+                    <div class="stat-number">WIN! 💪</div>
+                    <p>Students who "decide" at <strong>11pm (3 pints in)</strong>:</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%; background: var(--danger-red);">
+                            85% FAIL RATE 💀
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; font-style: italic;">
+                        "I'll just have one more" - Famous last words before poverty
+                    </p>
+                </div>
+                
+                <!-- Fun Meme Section -->
+                <div class="nudge-card" style="animation-delay: 0.6s; grid-column: 1 / -1;">
+                    <h3 style="text-align: center;">🎪 The 5 Stages of Night Out Spending Grief</h3>
+                    <div class="meme-scroll">
+                        <div class="meme-card">
+                            <div class="emoji">😇</div>
+                            <h4>6pm: "Just a quiet one"</h4>
+                            <p>Budget: £15 max</p>
+                        </div>
+                        <div class="meme-card">
+                            <div class="emoji">🍺</div>
+                            <h4>8pm: "One more won't hurt"</h4>
+                            <p>Spent: £25 already</p>
+                        </div>
+                        <div class="meme-card">
+                            <div class="emoji">🥳</div>
+                            <h4>10pm: "SHOTS FOR EVERYONE!"</h4>
+                            <p>Card: Being abused</p>
+                        </div>
+                        <div class="meme-card">
+                            <div class="emoji">🌮</div>
+                            <h4>2am: "Need. Food. Now."</h4>
+                            <p>Uber Eats: £30 minimum</p>
+                        </div>
+                        <div class="meme-card">
+                            <div class="emoji">☠️</div>
+                            <h4>10am: *Checks bank*</h4>
+                            <p>Balance: Emotional damage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Calculator Section -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <h2 class="section-title">🧮 The Drunk-O-Meter Calculator</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">
+                How f*cked is your wallet tonight? Let's find out! 
+            </p>
+            
+            <div class="calculator-card">
+                <div class="form-group">
+                    <label for="budget">💰 Your "I swear I'll stick to this" budget (£)</label>
+                    <input type="number" id="budget" value="20" min="0" max="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="venue">📍 Where's the damage happening?</label>
+                    <select id="venue">
+                        <option value="8">George IV (£8/pint) - RIP wallet</option>
+                        <option value="6">Three Tuns (£6/pint) - Still hurts</option>
+                        <option value="5">Spoons (£5/pint) - Budget king 👑</option>
+                        <option value="7">Random pub (£7/pint) - Mystery prices</option>
+                        <option value="12">Cocktail bar (£12/drink) - Fancy poverty</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rounds">👥 The deadly question: Buying rounds?</label>
+                    <select id="rounds">
+                        <option value="1">Hell no, every person for themselves</option>
+                        <option value="2">One round for my bestie 😅</option>
+                        <option value="3">Round for the squad (3 people) 😬</option>
+                        <option value="4">I'm Mr. Generous (4+ people) 💸</option>
+                        <option value="6">I'm an idiot (whole table) ☠️</option>
+                    </select>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateBudget()">
+                    Show Me The Damage 💥
+                </button>
+                
+                <div class="result-box" id="resultBox">
+                    <h3>Your Survival Guide 🆘</h3>
+                    <p id="drinkLimit"></p>
+                    <p id="budgetTip"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tracker Section -->
+    <section class="tracker-section">
+        <div class="container">
+            <h2 class="section-title">📊 The Accountability Zone</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">
+                Track your crimes against your bank account
+            </p>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('quick')">Reality Check</button>
+                <button class="tab" onclick="switchTab('log')">Shame Log</button>
+                <button class="tab" onclick="switchTab('insights')">Truth Bombs</button>
+            </div>
+            
+            <!-- Quick Calculator Tab -->
+            <div class="tab-content active" id="quickTab">
+                <h3>🎯 Expectation vs Reality Check</h3>
+                <div class="form-group">
+                    <label>What innocent you planned to spend:</label>
+                    <input type="number" id="plannedSpend" placeholder="£20">
+                </div>
+                <div class="form-group">
+                    <label>What chaos actually happened:</label>
+                    <input type="number" id="actualSpend" placeholder="£35">
+                </div>
+                <button class="calculate-btn" onclick="quickCompare()">
+                    Face The Truth 😬
+                </button>
+                <div id="quickResult"></div>
+            </div>
+            
+            <!-- Spending Log Tab -->
+            <div class="tab-content" id="logTab">
+                <h3>📝 Your Wall of Shame (or Fame?)</h3>
+                <div class="form-group">
+                    <label>Date of the incident:</label>
+                    <input type="date" id="logDate">
+                </div>
+                <div class="form-group">
+                    <label>Scene of the crime:</label>
+                    <input type="text" id="logVenue" placeholder="The George (again)">
+                </div>
+                <div class="form-group">
+                    <label>Damage done (£):</label>
+                    <input type="number" id="logAmount" placeholder="25">
+                </div>
+                <button class="calculate-btn" onclick="addLog()">
+                    Add to the Evidence 📸
+                </button>
+                
+                <table class="tracker-table" id="spendingTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Crime Scene</th>
+                            <th>Damage</th>
+                            <th>Regret It?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logTableBody">
+                        <!-- Your mistakes will appear here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Insights Tab -->
+            <div class="tab-content" id="insightsTab">
+                <h3>💣 Your Spending Truth Bombs</h3>
+                <div id="insightsContent">
+                    <p style="font-size: 1.2rem;">Start logging to unlock your personal roast! 🔥</p>
+                </div>
+                <button class="calculate-btn" onclick="exportData()">
+                    Export Evidence (CSV) 📁
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>LSE PP452 Behavioral Economics Project</strong></p>
+            <p>Making your wallet cry less, one student at a time 😢➡️😊</p>
+            <p>© 2024 Smart Spending Hub - Saving Students from Themselves</p>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
+                This is for academic research. Your data stays on your device.<br>
+                We're not judging you. Your bank account is.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Success Animation -->
+    <div class="success-animation" id="successAnimation">🎉</div>
+    
+    <script>
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Animated counter
+        function animateCounter(id, target, duration = 2000) {
+            const element = document.getElementById(id);
+            if (!element) return;
+            const start = 0;
+            const increment = target / (duration / 50);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 50);
+        }
+        
+        // Initialize savings counter
+        function initSavingsCounter() {
+            const savedAmount = localStorage.getItem('totalSaved') || 4750;
+            animateCounter('savingsCounter', savedAmount);
+        }
+        
+        // Draw donut chart
+        function drawDonutChart() {
+            const canvas = document.getElementById('donutChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) / 3;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Enable anti-aliasing
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            
+            // Draw 73% segment with gradient
+            const gradient = ctx.createLinearGradient(centerX - radius, centerY, centerX + radius, centerY);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // Draw 73% segment
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + (Math.PI * 2 * 0.73));
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            // Draw remaining 27% segment
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, -Math.PI / 2 + (Math.PI * 2 * 0.73), -Math.PI / 2 + Math.PI * 2);
+            ctx.closePath();
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fill();
+            
+            // Draw inner circle (donut hole) with white
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.65, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            
+            // Draw percentage text
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 48px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('73%', centerX, centerY - 10);
+            
+            // Draw subtitle
+            ctx.fillStyle = '#666';
+            ctx.font = '14px Inter, sans-serif';
+            ctx.fillText('Smart Squad', centerX, centerY + 25);
+        }
+        
+        // Spending slider
+        document.getElementById('spendingSlider')?.addEventListener('input', function(e) {
+            const value = e.target.value;
+            document.getElementById('sliderValue').textContent = value;
+            
+            const equivalents = [
+                { threshold: 10, text: 'A Netflix subscription' },
+                { threshold: 20, text: 'Your weekly food shop' },
+                { threshold: 30, text: 'A decent pair of shoes' },
+                { threshold: 40, text: 'Your gaming budget' },
+                { threshold: 50, text: 'Half your utility bills' },
+                { threshold: 60, text: 'A weekend trip somewhere' }
+            ];
+            
+            let equivalent = 'Some regrets';
+            for (let i = equivalents.length - 1; i >= 0; i--) {
+                if (value >= equivalents[i].threshold) {
+                    equivalent = equivalents[i].text;
+                    break;
+                }
+            }
+            
+            document.getElementById('equivalents').textContent = equivalent;
+        });
+        
+        // Calculate budget with fun responses
+        function calculateBudget() {
+            const budget = parseFloat(document.getElementById('budget').value);
+            const drinkPrice = parseFloat(document.getElementById('venue').value);
+            const rounds = parseFloat(document.getElementById('rounds').value);
+            
+            const effectivePrice = drinkPrice * rounds;
+            const maxDrinks = Math.floor(budget / effectivePrice);
+            
+            const resultBox = document.getElementById('resultBox');
+            const drinkLimit = document.getElementById('drinkLimit');
+            const budgetTip = document.getElementById('budgetTip');
+            
+            let limitText = '';
+            let tipText = '';
+            
+            if (maxDrinks === 0) {
+                limitText = '<strong>ZERO drinks! 🚫</strong> Maybe just stay home and watch Netflix?';
+                tipText = '💡 Pro tip: "Pre-drinks" is code for "I\'m broke but social"';
+            } else if (maxDrinks === 1) {
+                limitText = '<strong>ONE lonely drink 🍺</strong>';
+                tipText = '😅 Nurse it for 3 hours or embrace the water life!';
+            } else if (maxDrinks === 2) {
+                limitText = `<strong>TWO drinks max!</strong> You're basically sober.`;
+                tipText = '💡 Order slowly and befriend the tap water';
+            } else if (maxDrinks <= 4) {
+                limitText = `<strong>${maxDrinks} drinks!</strong> That's actually reasonable!`;
+                tipText = '✅ You might remember tonight AND afford breakfast!';
+            } else {
+                limitText = `<strong>${maxDrinks} drinks!</strong> Your liver is scared.`;
+                tipText = '⚠️ You won\'t remember this, but your bank will...';
+            }
+            
+            if (rounds >= 4) {
+                tipText += '<br><br>🚨 ALERT: You\'re not a millionaire! Stop buying rounds for randos!';
+            }
+            
+            drinkLimit.innerHTML = limitText;
+            budgetTip.innerHTML = tipText;
+            resultBox.classList.add('show');
+            
+            // Track usage
+            trackUsage('calculator_used');
+        }
+        
+        // Tab switching
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            if (tabName === 'insights') {
+                generateInsights();
+            }
+        }
+        
+        // Quick comparison with fun responses
+        function quickCompare() {
+            const planned = parseFloat(document.getElementById('plannedSpend').value);
+            const actual = parseFloat(document.getElementById('actualSpend').value);
+            const difference = actual - planned;
+            
+            const resultDiv = document.getElementById('quickResult');
+            
+            if (difference <= 0) {
+                resultDiv.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #38ef7d, #11998e); color: white; padding: 25px; border-radius: 15px; margin-top: 20px;">
+                        <h3 style="font-size: 2rem;">🎉 ABSOLUTE LEGEND!</h3>
+                        <p style="font-size: 1.3rem;">You saved £${Math.abs(difference).toFixed(2)}!</p>
+                        <p style="margin-top: 15px;">You're officially smarter than drunk you! Frame this moment! 🏆</p>
+                    </div>
+                `;
+                showSuccessAnimation();
+            } else if (difference <= 10) {
+                resultDiv.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 25px; border-radius: 15px; margin-top: 20px;">
+                        <h3 style="font-size: 1.8rem;">😅 Not terrible...</h3>
+                        <p style="font-size: 1.2rem;">Only £${difference.toFixed(2)} over budget</p>
+                        <p style="margin-top: 15px;">That's like... one overpriced cocktail. You'll survive!</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 25px; border-radius: 15px; margin-top: 20px;">
+                        <h3 style="font-size: 2rem;">💀 RIP YOUR WALLET</h3>
+                        <p style="font-size: 1.3rem;">£${difference.toFixed(2)} over budget!</p>
+                        <p style="margin-top: 15px;">Your bank account is filing for emotional damage compensation.</p>
+                        <p style="margin-top: 10px; font-size: 1.1rem;">
+                            💡 Next time: Leave your card at home. Seriously. Do it.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Add spending log
+        function addLog() {
+            const date = document.getElementById('logDate').value;
+            const venue = document.getElementById('logVenue').value;
+            const amount = document.getElementById('logAmount').value;
+            
+            if (!date || !venue || !amount) {
+                alert('Fill it all in! No hiding from the truth! 👀');
+                return;
+            }
+            
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            logs.push({ date, venue, amount: parseFloat(amount), id: Date.now() });
+            localStorage.setItem('spendingLogs', JSON.stringify(logs));
+            
+            displayLogs();
+            trackUsage('log_added');
+        }
+        
+        // Display logs
+        function displayLogs() {
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            const tbody = document.getElementById('logTableBody');
+            
+            tbody.innerHTML = '';
+            logs.forEach(log => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${log.date}</td>
+                    <td>${log.venue}</td>
+                    <td>£${log.amount.toFixed(2)}</td>
+                    <td><button onclick="deleteLog(${log.id})" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Forget This 🙈</button></td>
+                `;
+            });
+        }
+        
+        // Delete log
+        function deleteLog(id) {
+            if (confirm('Erasing the evidence? 🕵️‍♂️')) {
+                let logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+                logs = logs.filter(log => log.id !== id);
+                localStorage.setItem('spendingLogs', JSON.stringify(logs));
+                displayLogs();
+            }
+        }
+        
+        // Generate insights with personality
+        function generateInsights() {
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            const insightsDiv = document.getElementById('insightsContent');
+            
+            if (logs.length === 0) {
+                insightsDiv.innerHTML = '<p style="font-size: 1.3rem;">No data = No shame! Start logging to get roasted! 🔥</p>';
+                return;
+            }
+            
+            const total = logs.reduce((sum, log) => sum + log.amount, 0);
+            const average = total / logs.length;
+            
+            const venueSpending = {};
+            logs.forEach(log => {
+                venueSpending[log.venue] = (venueSpending[log.venue] || 0) + log.amount;
+            });
+            
+            const mostExpensiveVenue = Object.entries(venueSpending)
+                .sort(([,a], [,b]) => b - a)[0];
+            
+            let roastMessage = '';
+            if (average > 30) {
+                roastMessage = "You're spending like you have a trust fund. Plot twist: You don't! 💸";
+            } else if (average > 20) {
+                roastMessage = "You're at the danger zone! One more round and it's beans on toast for a week! 🍞";
+            } else {
+                roastMessage = "Actually doing great! Are you sure you go to LSE? 🎓";
+            }
+            
+            insightsDiv.innerHTML = `
+                <div style="display: grid; gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 25px; border-radius: 15px;">
+                        <h4>Total Damage Done 💥</h4>
+                        <p style="font-size: 2.5rem;">£${total.toFixed(2)}</p>
+                        <p>That's ${Math.floor(total/8)} pints you won't remember!</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #11998e, #38ef7d); color: white; padding: 25px; border-radius: 15px;">
+                        <h4>Average Night Out Cost 🌙</h4>
+                        <p style="font-size: 2.5rem;">£${average.toFixed(2)}</p>
+                        <p>${average > 25 ? 'Above student average! You fancy!' : 'Within reason. Proud of you!'}</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 25px; border-radius: 15px;">
+                        <h4>Your Kryptonite Venue 📍</h4>
+                        <p style="font-size: 1.8rem;">${mostExpensiveVenue ? `${mostExpensiveVenue[0]}` : 'N/A'}</p>
+                        <p style="font-size: 1.5rem;">£${mostExpensiveVenue ? mostExpensiveVenue[1].toFixed(2) : '0'} donated</p>
+                        <p>They should name a barstool after you!</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f39c12, #e67e22); padding: 25px; border-radius: 15px; color: white;">
+                        <h4>🎯 Your Personal Roast</h4>
+                        <p style="font-size: 1.2rem;">${roastMessage}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Export data
+        function exportData() {
+            const logs = JSON.parse(localStorage.getItem('spendingLogs') || '[]');
+            
+            let csv = 'Date,Venue,Amount(£),Regret Level\n';
+            logs.forEach(log => {
+                const regretLevel = log.amount > 30 ? 'High' : log.amount > 20 ? 'Medium' : 'Low';
+                csv += `${log.date},${log.venue},${log.amount},${regretLevel}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my_spending_crimes.csv';
+            a.click();
+            
+            trackUsage('data_exported');
+        }
+        
+        // Download Excel Budget Tracker Template
+        function downloadExcelTracker() {
+            // Create CSV template that Excel can open
+            const csvContent = `Smart Spending Budget Tracker - Stop Your Wallet from Getting Wasted!,,,,,
+Date,Day,Venue,Sober Me Budget (£),Drunk Me Spent (£),Damage (£),Regret Notes
+${new Date().toISOString().split('T')[0]},Monday,The George,15,,,SET THIS AT 5PM NOT 11PM!
+${new Date().toISOString().split('T')[0]},Tuesday,Three Tuns,10,,,Still expensive but less painful
+${new Date().toISOString().split('T')[0]},Wednesday,Netflix & Chill,0,,,Your wallet thanks you
+${new Date().toISOString().split('T')[0]},Thursday,Spoons,12,,,Pre-drinks are your friend
+${new Date().toISOString().split('T')[0]},Friday,The George,20,,,Weekend limit = danger zone
+${new Date().toISOString().split('T')[0]},Saturday,Various,25,,,RIP bank account
+${new Date().toISOString().split('T')[0]},Sunday,Recovery,0,,,Too broke to move anyway
+,,,,,
+Weekly Damage Report,,,,,
+What Sober You Planned:,=SUM(D3:D9),,,,
+What Drunk You Did:,=SUM(E3:E9),,,,
+Total Saved/Lost:,=B12-B13,,,,
+,,,,,
+Reality Checks:,,,,,
+✅ 73% of your mates spend LESS than £20/night - you're not missing out!,,,,,
+💀 George IV shows as "LSE Catering" - your parents think you eat a lot,,,,,
+🍕 £40 = 8 Domino's pizzas or 1 forgettable night,,,,,
+😭 87% wake up and immediately regret last night's spending,,,,,
+🎯 Set your limit at 5pm while sober - drunk you is an idiot,,,,,
+,,,,,
+The Truth About Your Spending:,,,,,
+£8 = 1 pint at George (overpriced),,,,,
+£10 = 2 coffees (needed for hangover),,,,,
+£15 = Actual lunch (not liquid lunch),,,,,
+£20 = Weekly transport (useful),,,,,
+£40 = Those textbooks you "can't afford",,,,,`;
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'Stop_Getting_Wasted_Budget_Tracker.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Track usage
+            trackUsage('excel_tracker_downloaded');
+            
+            // Show success message
+            alert('Budget Buddy downloaded! 🎉 Open it in Excel and start saving yourself from yourself!');
+        }
+        
+        // Success animation
+        function showSuccessAnimation() {
+            const animation = document.getElementById('successAnimation');
+            animation.style.display = 'block';
+            setTimeout(() => {
+                animation.style.display = 'none';
+            }, 1000);
+        }
+        
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        
+        // Track usage
+        function trackUsage(action) {
+            const usage = JSON.parse(localStorage.getItem('usageTracking') || '{}');
+            usage[action] = (usage[action] || 0) + 1;
+            usage.lastUsed = new Date().toISOString();
+            localStorage.setItem('usageTracking', JSON.stringify(usage));
+            
+            // Log for analytics (replace with actual Google Analytics)
+            console.log('Usage tracked:', action, usage);
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initSavingsCounter();
+            drawDonutChart();
+            displayLogs();
+            
+            // Animate stats
+            animateCounter('socialNormStat', 73, 1500);
+            animateCounter('regretStat', 87, 2000);
+            
+            // Load dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').textContent = '☀️';
+            }
+            
+            // Track page view
+            trackUsage('page_view');
+            
+            // Set up intersection observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.nudge-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
